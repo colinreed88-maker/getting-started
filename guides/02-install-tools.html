@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -149,20 +149,16 @@
     word-wrap: break-word;
   }
 
-  code {
-    background: var(--midnight);
-    color: var(--moonlight);
+  code:not(pre code) {
+    background: var(--moonlight);
     padding: 2px 6px;
     border-radius: 4px;
-    font-size: 12px;
-  }
-
-  pre code {
-    background: none;
-    padding: 0;
+    font-size: 13px;
   }
 
   strong { font-weight: 600; }
+
+  a { color: var(--sunlight); }
 </style>
 </head>
 <body>
@@ -182,7 +178,7 @@
 <h2>1. Node.js</h2>
 <p>Node.js is the runtime that executes JavaScript outside of a browser. Our scripts, build tools, and package manager all depend on it.</p>
 <ol>
-  <li>Go to https://nodejs.org</li>
+  <li>Go to <a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a></li>
   <li>Download the <strong>LTS</strong> (Long Term Support) version -- it will be a button labeled something like "22.x LTS"</li>
   <li>Run the installer. Accept all defaults. Click Next through each screen.</li>
   <li>When it finishes, open a terminal (press Win + R, type cmd, press Enter) and run:</li>
@@ -202,7 +198,7 @@ corepack prepare pnpm@10.30.1 --activate</code></pre>
 <h2>3. Git</h2>
 <p>Git tracks changes to code and syncs with GitHub. Every project we build uses it.</p>
 <ol>
-  <li>Go to https://git-scm.com/download/win</li>
+  <li>Go to <a href="https://git-scm.com/download/win" target="_blank" rel="noopener">git-scm.com</a></li>
   <li>Download and run the installer. Accept all defaults.</li>
   <li>After installation, open a new terminal and run:</li>
 </ol>
@@ -225,7 +221,7 @@ git config --global user.email "your.name@flow.life"</code></pre>
 <h2>4. Cursor</h2>
 <p>Cursor is our primary AI code editor.</p>
 <ol>
-  <li>Go to https://cursor.com</li>
+  <li>Go to <a href="https://cursor.com" target="_blank" rel="noopener">cursor.com</a></li>
   <li>Click "Download" and install it</li>
   <li>Open Cursor. It will ask you to sign in -- create an account or sign in with GitHub</li>
   <li>When it opens, you will see a screen that looks like a code editor with a sidebar on the left and a chat panel on the right</li>
@@ -273,7 +269,7 @@ git config --global user.email "your.name@flow.life"</code></pre>
 <p>Expected: git version 2.x.x</p>
 <p>If all three show version numbers, you are good to go.</p>
 
-<nav class="nav-bar">
+<nav class="nav-bar" style="margin-top: 48px; margin-bottom: 0; padding-top: 24px; border-top: 1px solid rgba(61,61,61,0.12); border-bottom: none;">
   <a href="../START HERE.html">Back to Start</a>
   <div class="nav-right">
     <a href="01-ai-at-flow.html">Previous</a>

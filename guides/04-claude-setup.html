@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -142,20 +142,16 @@
     word-wrap: break-word;
   }
 
-  code {
-    background: var(--midnight);
-    color: var(--moonlight);
+  code:not(pre code) {
+    background: var(--moonlight);
     padding: 2px 6px;
     border-radius: 4px;
-    font-size: 12px;
-  }
-
-  pre code {
-    background: none;
-    padding: 0;
+    font-size: 13px;
   }
 
   strong { font-weight: 600; }
+
+  a { color: var(--sunlight); }
 </style>
 </head>
 <body>
@@ -177,7 +173,7 @@
 
 <h2>1. Install Claude Desktop</h2>
 <ol>
-  <li>Download from claude.ai/download</li>
+  <li>Download from <a href="https://claude.ai/download" target="_blank" rel="noopener">claude.ai/download</a></li>
   <li>Install and sign in (you will need an Anthropic account or use our team account)</li>
   <li>Verify: Claude opens and you can start a conversation</li>
 </ol>
@@ -240,7 +236,7 @@
 </table>
 <p>They complement each other. Start ideas in Claude, build them in Cursor.</p>
 
-<nav class="nav-bar">
+<nav class="nav-bar" style="margin-top: 48px; margin-bottom: 0; padding-top: 24px; border-top: 1px solid rgba(61,61,61,0.12); border-bottom: none;">
   <a href="../START HERE.html">Back to Start</a>
   <div class="nav-right">
     <a href="03-cursor-setup.html">Previous</a>
