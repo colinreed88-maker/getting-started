@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Getting Started — AI at Flow</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: "Roughwell";
+    src: url("config/assets/fonts/Roughwell.woff2") format("woff2"),
+         url("config/assets/fonts/Roughwell.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --moonlight: #F3EDDF;
+    --midnight: #3D3D3D;
+    --sunlight: #E89700;
+    --ocean: #7DADBB;
+    --bg: #EDE8DA;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "Poppins", sans-serif;
+    background: var(--bg);
+    color: var(--midnight);
+    line-height: 1.7;
+    padding: 48px 24px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-family: "Roughwell", cursive;
+    font-size: 48px;
+    font-weight: normal;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    color: #888;
+    margin-bottom: 32px;
+  }
+
+  h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 40px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--sunlight);
+  }
+
+  p { font-size: 14px; margin-bottom: 12px; }
+
+  .intro-card {
+    background: white;
+    border-radius: 12px;
+    padding: 28px 32px;
+    border: 1px solid rgba(61,61,61,0.08);
+    box-shadow: 0 1px 3px rgba(61,61,61,0.04), 0 8px 32px rgba(61,61,61,0.06);
+    margin-bottom: 32px;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .guide-list {
+    list-style: none;
+    margin-top: 16px;
+  }
+
+  .guide-item {
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(61,61,61,0.08);
+    box-shadow: 0 1px 3px rgba(61,61,61,0.04), 0 4px 16px rgba(61,61,61,0.04);
+    overflow: hidden;
+  }
+
+  .guide-item a {
+    display: flex;
+    align-items: center;
+    padding: 16px 24px;
+    text-decoration: none;
+    color: var(--midnight);
+    transition: background 0.15s;
+  }
+
+  .guide-item a:hover { background: var(--moonlight); }
+
+  .guide-num {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--sunlight);
+    width: 48px;
+    flex-shrink: 0;
+  }
+
+  .guide-content { flex: 1; }
+
+  .guide-title {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .guide-desc {
+    font-size: 12px;
+    color: #888;
+    margin-top: 2px;
+  }
+
+  .guide-time {
+    font-size: 12px;
+    color: #888;
+    flex-shrink: 0;
+    margin-left: 16px;
+    background: var(--moonlight);
+    padding: 4px 10px;
+    border-radius: 12px;
+  }
+
+  .note {
+    font-size: 13px;
+    color: #888;
+    line-height: 1.6;
+    margin-top: 8px;
+  }
+
+  .config-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .config-item {
+    background: white;
+    border-radius: 10px;
+    padding: 16px 20px;
+    border: 1px solid rgba(61,61,61,0.08);
+  }
+
+  .config-item .label {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .config-item .desc {
+    font-size: 11px;
+    color: #888;
+    margin-top: 4px;
+  }
+
+  .config-item code {
+    font-size: 11px;
+    background: var(--moonlight);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: Consolas, Monaco, monospace;
+  }
+
+  .prereq-list {
+    list-style: none;
+    margin-top: 12px;
+  }
+
+  .prereq-list li {
+    font-size: 14px;
+    padding: 6px 0;
+    padding-left: 24px;
+    position: relative;
+  }
+
+  .prereq-list li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--sunlight);
+    font-weight: 700;
+  }
+
+  .brand-link {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 10px 24px;
+    background: var(--sunlight);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .brand-link:hover { opacity: 0.9; }
+
+  .help-box {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid rgba(61,61,61,0.08);
+    margin-top: 16px;
+    font-size: 14px;
+  }
+
+  .file-note {
+    background: var(--moonlight);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-top: 16px;
+    font-size: 12px;
+    color: #666;
+    line-height: 1.7;
+  }
+</style>
+</head>
+<body>
+
+<h1>Getting Started</h1>
+<p class="subtitle">AI at Flow</p>
+
+<div class="intro-card">
+  Welcome to Flow's AI development toolkit. This guide takes you from zero coding experience to building branded dashboards, presentations, and internal tools -- all with AI agents doing the heavy lifting.
+  <br><br>
+  We use two AI development tools: <strong>Cursor</strong> (an AI-powered code editor) and <strong>Claude</strong> (Anthropic's AI assistant). Together, they form a system where you describe what you want to build, and the AI writes the code, follows our brand standards, and deploys the result automatically.
+  <br><br>
+  This is not about becoming a software engineer. It is about giving Flow team members superpowers.
+</div>
+
+<h2>The Guides</h2>
+<p>Read these in order. Each one builds on the last. The full setup takes about 2.5 hours.</p>
+
+<ul class="guide-list">
+  <li class="guide-item">
+    <a href="01-ai-at-flow.html">
+      <div class="guide-num">01</div>
+      <div class="guide-content">
+        <div class="guide-title">AI at Flow</div>
+        <div class="guide-desc">Why we work this way and what it unlocks</div>
+      </div>
+      <div class="guide-time">10 min</div>
+    </a>
+  </li>
+  <li class="guide-item">
+    <a href="02-install-tools.html">
+      <div class="guide-num">02</div>
+      <div class="guide-content">
+        <div class="guide-title">Install Tools</div>
+        <div class="guide-desc">Install Cursor, Claude, pnpm, Git, and Node.js step by step</div>
+      </div>
+      <div class="guide-time">30 min</div>
+    </a>
+  </li>
+  <li class="guide-item">
+    <a href="03-cursor-setup.html">
+      <div class="guide-num">03</div>
+      <div class="guide-content">
+        <div class="guide-title">Cursor Setup</div>
+        <div class="guide-desc">Configure rules, skills, agents, and brand assets</div>
+      </div>
+      <div class="guide-time">20 min</div>
+    </a>
+  </li>
+  <li class="guide-item">
+    <a href="04-claude-setup.html">
+      <div class="guide-num">04</div>
+      <div class="guide-content">
+        <div class="guide-title">Claude Desktop Setup</div>
+        <div class="guide-desc">Set up a Claude project with Flow context</div>
+      </div>
+      <div class="guide-time">15 min</div>
+    </a>
+  </li>
+  <li class="guide-item">
+    <a href="05-flow-domain-knowledge.md">
+      <div class="guide-num">05</div>
+      <div class="guide-content">
+        <div class="guide-title">Flow Domain Knowledge</div>
+        <div class="guide-desc">Brand identity, business context, and conventions</div>
+      </div>
+      <div class="guide-time">15 min</div>
+    </a>
+  </li>
+  <li class="guide-item">
+    <a href="06-workflow-and-lifecycle.html">
+      <div class="guide-num">06</div>
+      <div class="guide-content">
+        <div class="guide-title">Workflow and Lifecycle</div>
+        <div class="guide-desc">The build process from idea to deployed product</div>
+      </div>
+      <div class="guide-time">20 min</div>
+    </a>
+  </li>
+  <li class="guide-item">
+    <a href="07-your-first-build.html">
+      <div class="guide-num">07</div>
+      <div class="guide-content">
+        <div class="guide-title">Your First Build</div>
+        <div class="guide-desc">Build a team directory page using the full workflow</div>
+      </div>
+      <div class="guide-time">45 min</div>
+    </a>
+  </li>
+  <li class="guide-item">
+    <a href="08-reference.html">
+      <div class="guide-num">08</div>
+      <div class="guide-content">
+        <div class="guide-title">Reference</div>
+        <div class="guide-desc">Cheat sheet for colors, commands, agents, and tools</div>
+      </div>
+      <div class="guide-time">Ongoing</div>
+    </a>
+  </li>
+</ul>
+
+<div class="file-note">
+  <strong>About the guide files:</strong> The guides above are HTML pages that open in any browser. The folder also contains <code>.md</code> (Markdown) versions of each guide with the same content, which you can read in Cursor once it is installed.
+</div>
+
+<h2>What is in the Config Folder</h2>
+<p>The <code>config/</code> folder contains everything you need to configure your AI tools. Guide 03 walks you through how to install each piece.</p>
+
+<div class="config-grid">
+  <div class="config-item">
+    <div class="label">Cursor Rules</div>
+    <div class="desc">7 files that teach the AI our brand standards, code conventions, and workflow</div>
+    <div class="desc"><code>config/cursor-rules/</code></div>
+  </div>
+  <div class="config-item">
+    <div class="label">Cursor Agents</div>
+    <div class="desc">2 specialized AI personas for slide decks and new projects</div>
+    <div class="desc"><code>config/cursor-agents/</code></div>
+  </div>
+  <div class="config-item">
+    <div class="label">Cursor Skills</div>
+    <div class="desc">Interactive workflows like generating a PRD before building</div>
+    <div class="desc"><code>config/cursor-skills/</code></div>
+  </div>
+  <div class="config-item">
+    <div class="label">Claude Instructions</div>
+    <div class="desc">Project instructions to paste into Claude Desktop</div>
+    <div class="desc"><code>config/claude-project-instructions.md</code></div>
+  </div>
+  <div class="config-item">
+    <div class="label">Brand Fonts</div>
+    <div class="desc">Roughwell, Generation 1970 (Light, Regular, Bold) in .otf and .woff2</div>
+    <div class="desc"><code>config/assets/fonts/</code></div>
+  </div>
+  <div class="config-item">
+    <div class="label">Brand Logos</div>
+    <div class="desc">Flow logo SVGs -- Wing and Faded variants in Cream and Grey</div>
+    <div class="desc"><code>config/assets/logos/</code></div>
+  </div>
+</div>
+
+<a class="brand-link" href="config/brand-guide.html">View the Visual Brand Guide</a>
+<p class="note" style="margin-top:8px">Opens a visual one-pager with color swatches, font samples, component examples, and the full Next.js/Tailwind config.</p>
+
+<h2>Prerequisites</h2>
+<ul class="prereq-list">
+  <li>A Windows, Mac, or Linux computer with admin permissions</li>
+  <li>A GitHub account (free)</li>
+  <li>A Cursor license (check with your manager)</li>
+  <li>An Anthropic account for Claude (check with your manager)</li>
+  <li>Curiosity and patience -- the first setup takes a couple hours, then everything moves fast</li>
+</ul>
+
+<h2>Questions</h2>
+<div class="help-box">
+  If you get stuck at any point, ask your manager or the team channel, or open a conversation in Cursor or Claude and describe the problem. The AI agents are configured to help you debug.
+</div>
+
+</body>
+</html>

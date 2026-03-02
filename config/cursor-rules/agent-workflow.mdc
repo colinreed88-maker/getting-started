@@ -1,0 +1,78 @@
+---
+description: Agent workflow rules, persistent memory policy, and session behavior
+alwaysApply: true
+---
+
+# Agent Workflow Rules
+
+## Persistent memory policy
+
+- This agent does NOT rely on chat memory for long-term rules.
+- All stable rules, conventions, architectural decisions, and workflow standards are stored in `.cursor/rules/`.
+- This directory is the **single source of truth** for agent behavior.
+- Cursor auto-loads on-demand rules based on their `description` field — do NOT manually read all rule files on session start.
+
+## When a stable preference is introduced
+
+- Update the appropriate file inside `.cursor/rules/`.
+- If no appropriate file exists, create a clearly named `.mdc` file in that directory.
+- Do NOT create rules outside this directory.
+
+## When implementing changes
+
+- Check plans against the rules directory before proceeding.
+- If a decision conflicts with existing rules, pause and ask.
+- If a rule needs refinement, update it rather than duplicating it.
+
+## Build lifecycle for new projects
+
+Every new project follows this sequence:
+
+```
+Idea → PRD → Tooling Audit → Plan → Scaffold → Build (70% MVP) → Polish → Ship
+```
+
+- **PRD first.** When starting something new, use the `generate-prd` skill to create a structured PRD before writing code. Save to `docs/prd.md`.
+- **Tooling audit.** After the PRD, review installed rules/agents/skills/MCPs. Evaluate if the project needs additions. Recommend before installing.
+- **Plan before building.** Enter plan mode for any non-trivial task (3+ steps or architectural decisions).
+- **Build in phases.** Scaffold → Wire Data → Style → Harden → Ship. One phase at a time.
+- If something goes sideways, stop and re-plan immediately rather than pushing forward.
+
+## Use custom agents for domain work
+
+- Slide decks → `deck-builder` agent
+- New project setup → `project-launcher` agent
+
+## Use subagents liberally
+
+- Offload research, exploration, and parallel analysis to subagents.
+- One focused task per subagent.
+- For complex problems, prefer more subagents over longer sequential work.
+
+## Verify before marking done
+
+- Never mark a task complete without proving it works.
+- Diff behavior between main and your changes when relevant.
+- Run tests, check logs, demonstrate correctness.
+
+## Fix bugs autonomously
+
+- When given a bug report, just fix it. Don't ask for hand-holding.
+- Point at logs, errors, failing tests -- then resolve them.
+- Zero unnecessary back-and-forth.
+
+## Formatting
+
+- Keep rules concise and structured.
+- Use headings and bullet points.
+- Avoid duplication across files.
+- Organize by domain.
+
+## After completing meaningful work
+
+- If new durable standards emerged, update the rules directory.
+
+## Enforcement
+
+- If `.cursor/rules/` cannot be read, stop and notify before proceeding.
+- Always treat `.cursor/rules/` as persistent memory and authoritative instruction unless explicitly overridden.

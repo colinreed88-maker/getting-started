@@ -1,0 +1,255 @@
+---
+description: How to create, edit, and structure HTML slide decks using the Flow template. Load when creating a new presentation, modifying slide content, or working in the Slide Template folder.
+alwaysApply: false
+---
+
+# Slide Deck Creation
+
+## Quick start
+
+1. Copy the `slide-template/` folder to a new folder (e.g. `decks\q2-board-deck\`)
+2. Rename the `<title>` tag and the title slide `<h1>` to the new deck name
+3. Add, remove, or reorder slides as needed
+4. Replace placeholder content with real data
+5. After structural changes, renumber all `data-slide` attributes starting from 0
+6. Update the localStorage key version (e.g. `v1` → `v2`) if slide positions changed
+
+## Template structure
+
+The template is a single `index.html` file (~1500 lines) with:
+- CSS styles (lines 1-770)
+- Slide HTML (lines 770-1020)
+- JavaScript: editing, nav, sorter, comments, charts, heatmaps, fullscreen, mobile (lines 1040+)
+
+Required asset folders (copy with the template):
+- `assets/fonts/` — Roughwell.otf, Generation1970-Light.otf, Generation1970.otf, Generation1970-Bold.otf
+- `assets/logos/` — Flow-Logo-FADED-CREAM.svg (used on title slide)
+
+External dependency: `https://cdn.jsdelivr.net/npm/chart.js@4.4.1` (loaded via CDN)
+
+## Slide types reference
+
+Each slide is a `<div class="slide" data-slide="N">` inside `<div class="deck" id="deck">`.
+
+### 0. Title / Cover
+```html
+<div class="slide slide-title title-a" data-slide="0">
+  <h1>Deck Title</h1>
+  <p class="date">February 2026</p>
+  <div class="accent-bar"></div>
+  <img src="assets/logos/Flow-Logo-FADED-CREAM.svg" class="title-logo-corner" alt="Flow" />
+</div>
+```
+Dark midnight background, Roughwell headline, cream text. Always position 0.
+
+### 1. Table of Contents
+```html
+<div class="slide" data-slide="1">
+  <div class="s-header"><div class="pill">Flow</div><div class="s-title">Table of Contents</div></div>
+  <div class="s-body">
+    <ul class="toc-list" id="tocList"></ul>
+  </div>
+</div>
+```
+Auto-populated by `buildTOC()` from section dividers. No manual editing needed.
+
+### 2. Section Divider
+```html
+<div class="slide slide-divider" data-slide="2">
+  <div class="accent-bar"></div>
+  <h2>Section Name</h2>
+</div>
+```
+Midnight background. Insert before each major section. TOC auto-detects these.
+
+### 3. Text + Bullets
+```html
+<div class="slide" data-slide="3">
+  <div class="s-header"><div class="pill">Section</div><div class="s-title">Slide Title</div></div>
+  <div class="s-body">
+    <ul class="bl">
+      <li><strong>Point</strong> -- detail</li>
+      <li><strong>Point</strong> -- detail
+        <ul class="sub"><li>Sub-detail</li></ul>
+      </li>
+    </ul>
+  </div>
+</div>
+```
+Pill badge shows section name. Bullets use en-dash prefix (automatic via CSS).
+
+### 4. KPI / Metric Cards
+```html
+<div class="slide" data-slide="4">
+  <div class="s-header"><div class="pill">Section</div><div class="s-title">Key Metrics</div></div>
+  <div class="s-body">
+    <div class="exec-grid">
+      <div class="exec-card wide">
+        <div class="label">Category</div>
+        <div class="val-row">
+          <div class="item"><span class="lbl">Label</span><span class="v">$24.0M</span></div>
+          <div class="item"><span class="lbl">Label</span><span class="v neg">($3.2M)</span></div>
+        </div>
+        <div class="note">Footnote</div>
+      </div>
+      <div class="exec-card"><div class="label">Metric</div><div class="val">$42.1M</div></div>
+    </div>
+  </div>
+</div>
+```
+3-column grid. `.wide` spans all 3. `.neg` for red negatives. `.note` for footnotes.
+
+### 5. Chart
+```html
+<div class="slide" data-slide="5">
+  <div class="s-header"><div class="pill">Section</div><div class="s-title">Chart Title</div></div>
+  <div class="s-body">
+    <div class="chart-area" style="max-height:420px"><canvas id="myChartId"></canvas></div>
+  </div>
+</div>
+```
+Then add the chart config in the `drawCharts()` function (see Charts section below).
+
+### 6. Narrow Table
+```html
+<div class="slide" data-slide="6">
+  <div class="s-header"><div class="pill">Section</div><div class="s-title">Table Title</div></div>
+  <div class="s-body">
+    <table class="ft">
+      <thead><tr><th>Category</th><th>FY2026</th></tr></thead>
+      <tbody>
+        <tr><td>Item</td><td>$8.4M</td></tr>
+        <tr class="total"><td>Total</td><td>$20.3M</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+```
+Use `table.ft` for 2-3 column centered tables. `.total` for bold total rows.
+
+### 7. Wide Table (Heatmap)
+```html
+<div class="slide" data-slide="7">
+  <div class="s-header"><div class="pill">Section</div><div class="s-title">Detail</div></div>
+  <div class="s-body">
+    <div class="opco-table-wrap">
+      <table class="opco heatmap">
+        <thead><tr><th></th><th>Col A</th><th>Col B</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td>Row</td><td data-v="120">$120K</td><td data-v="85">$85K</td><td>$205K</td></tr>
+          <tr class="total-row"><td>Total</td><td>$120K</td><td>$85K</td><td>$205K</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+```
+Use `table.opco` for many columns. Add `.heatmap` for auto-shading. `data-v` attributes drive intensity. `.total-row` for totals. Wrap in `.opco-table-wrap` for sticky headers + scroll.
+
+### 8. Two-Column
+```html
+<div class="slide" data-slide="8">
+  <div class="s-header"><div class="pill">Section</div><div class="s-title">Title</div></div>
+  <div class="s-body">
+    <div class="two-col">
+      <div>
+        <div class="col-head">Left</div>
+        <ul class="bl"><li>Point</li></ul>
+      </div>
+      <div>
+        <div class="col-head">Right</div>
+        <ul class="bl"><li>Point</li></ul>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+### 9. Table + Commentary
+```html
+<div class="slide" data-slide="9">
+  <div class="s-header"><div class="pill">Section</div><div class="s-title">Summary</div></div>
+  <div class="s-body" style="display:flex; gap:28px; align-items:flex-start;">
+    <div class="opco-table-wrap" style="flex:0 0 auto;">
+      <table class="opco" style="width:360px;">
+        <thead><tr><th></th><th>FY2026</th></tr></thead>
+        <tbody>
+          <tr><td>Item</td><td>$14.2M</td></tr>
+          <tr class="total-row"><td>Total</td><td>$17.2M</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="content" style="flex:1; margin-top:10px;">
+      <ul class="bl">
+        <li><strong>Topic</strong> -- explanation</li>
+      </ul>
+    </div>
+  </div>
+</div>
+```
+
+## Charts
+
+Charts use Chart.js. Each chart needs two things:
+1. A `<canvas id="uniqueId">` inside `.chart-area` in the slide HTML
+2. A config block in the `drawCharts()` function at the bottom of the file
+
+### Adding a chart
+
+Find `drawCharts()` and add a new block:
+```javascript
+var el = document.getElementById('myChartId');
+if (el) new Chart(el, {
+  type: 'bar',       // 'bar', 'line', 'doughnut', etc.
+  data: {
+    labels: ['A', 'B', 'C'],
+    datasets: [{ data: [10, 20, 30], backgroundColor: sun, borderRadius: 4, barThickness: 28 }]
+  },
+  options: {
+    indexAxis: 'y',   // horizontal bars; omit for vertical
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { enabled: false } },
+    scales: { x: { display: false, beginAtZero: true }, y: { grid: { display: false } } }
+  },
+  plugins: [barLabelPlugin]  // reuse the existing plugin for bar labels
+});
+```
+
+### Waterfall chart pattern (stacked bar)
+Two datasets: transparent base (spacer) + colored value. Both with `stacked: true`.
+```javascript
+datasets: [
+  { label: 'Base', data: [0, 80, 60], backgroundColor: 'transparent', borderWidth: 0 },
+  { label: 'Value', data: [100, 20, 60], backgroundColor: [olive, ocean, olive] }
+]
+// scales: { x: { stacked: true }, y: { stacked: true, display: false } }
+```
+
+### Flow palette for charts
+- Sunlight `#E89700` — positive values, highlights
+- Olive `#767317` — totals (beginning/ending bars)
+- Ocean `#7DADBB` — primary category
+- Roots `#8C4500` — negatives, decreases
+- Heart `#F99AA9` — secondary negatives, RE items
+- Midnight `#3D3D3D` — neutral bars
+
+## Adding and removing slides
+
+1. Insert or delete the `<div class="slide" ...>...</div>` block
+2. Renumber all `data-slide` attributes sequentially starting from 0
+3. Make sure the first slide has `class="slide slide-title title-a active"` (the `active` class)
+4. The nav counter initial text can be updated but is overwritten by JS on load
+5. If the localStorage key still points to old structure, bump the version suffix (e.g. `v1` → `v2`) in the `STORAGE_KEY` variable
+
+## Brand constraints
+
+- Colors: use the Flow palette (Moonlight, Midnight, Sunlight, Heart, Ocean, Olive, Roots). No generic blue.
+- Fonts: Roughwell for headlines, Generation 1970 for slide titles, Poppins for body text
+- Tone: first-person plural (we, us), no exclamation points, no emojis, Oxford comma
+- Negatives always in parentheses: ($3.2M) not -$3.2M
+- Numbers in tables use tabular-nums (automatic via CSS)
+
+## Deployment (optional)
+
+- Push folder to GitHub, connect to Vercel for instant hosting
+- For PDF export, add a Vercel serverless function using Puppeteer (see `library/decks/f1-deck/` `/api/pdf` for reference)

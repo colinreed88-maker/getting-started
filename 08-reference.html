@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reference — AI at Flow</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: "Roughwell";
+    src: url("config/assets/fonts/Roughwell.woff2") format("woff2"),
+         url("config/assets/fonts/Roughwell.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --moonlight: #F3EDDF;
+    --midnight: #3D3D3D;
+    --sunlight: #E89700;
+    --ocean: #7DADBB;
+    --bg: #EDE8DA;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "Poppins", sans-serif;
+    background: var(--bg);
+    color: var(--midnight);
+    line-height: 1.7;
+    padding: 48px 24px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-family: "Roughwell", cursive;
+    font-size: 48px;
+    font-weight: normal;
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 40px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--sunlight);
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p { font-size: 14px; margin-bottom: 12px; }
+
+  .nav-top, .nav-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    margin-bottom: 32px;
+    border-bottom: 1px solid rgba(61,61,61,0.1);
+  }
+
+  .nav-bottom {
+    margin-top: 48px;
+    margin-bottom: 0;
+    padding-top: 24px;
+    border-top: 1px solid rgba(61,61,61,0.1);
+    border-bottom: none;
+  }
+
+  .nav-top a, .nav-bottom a {
+    color: var(--sunlight);
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  .nav-top a:hover, .nav-bottom a:hover { text-decoration: underline; }
+
+  .nav-right { display: flex; gap: 24px; }
+
+  .content-card {
+    background: white;
+    border-radius: 12px;
+    padding: 28px 32px;
+    border: 1px solid rgba(61,61,61,0.08);
+    box-shadow: 0 1px 3px rgba(61,61,61,0.04), 0 8px 32px rgba(61,61,61,0.06);
+    margin-bottom: 24px;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(61,61,61,0.04), 0 4px 16px rgba(61,61,61,0.04);
+    margin: 16px 0;
+  }
+
+  th, td {
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 14px;
+  }
+
+  th {
+    background: #F0EBE0;
+    font-weight: 600;
+  }
+
+  tr:not(:last-child) td { border-bottom: 1px solid rgba(61,61,61,0.08); }
+
+  pre, code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 13px;
+  }
+
+  pre {
+    background: #3D3D3D;
+    color: #F3EDDF;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0;
+    white-space: pre-wrap;
+  }
+
+  code:not(pre code) {
+    background: var(--moonlight);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+
+  ul {
+    list-style: none;
+    margin: 12px 0;
+  }
+
+  ul li {
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+    font-size: 14px;
+  }
+
+  ul li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--sunlight);
+  }
+
+  strong { font-weight: 600; }
+
+  a { color: var(--sunlight); }
+</style>
+</head>
+<body>
+
+<nav class="nav-top">
+  <a href="START HERE.html">Back to Start</a>
+  <div class="nav-right">
+    <a href="07-your-first-build.html">Previous</a>
+  </div>
+</nav>
+
+<h1>Reference</h1>
+
+<p>Quick-lookup cheat sheet. Bookmark this page.</p>
+
+<h2>Brand Colors</h2>
+
+<table>
+  <thead>
+    <tr><th>Name</th><th>Hex</th><th>CSS Variable</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Moonlight</td><td>#F3EDDF</td><td>--color-moonlight</td></tr>
+    <tr><td>Midnight</td><td>#3D3D3D</td><td>--color-midnight</td></tr>
+    <tr><td>Sunlight</td><td>#E89700</td><td>--color-sunlight</td></tr>
+    <tr><td>Heart</td><td>#F99AA9</td><td>--color-heart</td></tr>
+    <tr><td>Ocean Swell</td><td>#7DADBB</td><td>--color-ocean-swell</td></tr>
+    <tr><td>Olive</td><td>#767317</td><td>--color-olive</td></tr>
+    <tr><td>Roots</td><td>#8C4500</td><td>--color-roots</td></tr>
+  </tbody>
+</table>
+
+<p>Background surface: #EDE8DA</p>
+
+<h2>Brand Fonts</h2>
+
+<table>
+  <thead>
+    <tr><th>Font</th><th>Usage</th><th>Weight</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Roughwell</td><td>Headlines, display</td><td>Regular</td></tr>
+    <tr><td>Generation 1970 Light</td><td>Subheaders, CTAs</td><td>Light</td></tr>
+    <tr><td>Poppins</td><td>Body text</td><td>300-700</td></tr>
+  </tbody>
+</table>
+
+<h2>Common Commands</h2>
+
+<pre>pnpm dev          # Start local dev server
+pnpm build        # Production build (run before deploying)
+pnpm add &lt;pkg&gt;    # Install a package
+pnpm remove &lt;pkg&gt; # Uninstall a package
+pnpm dlx &lt;cmd&gt;    # Run a one-off command (replaces npx)</pre>
+
+<h2>Git Basics</h2>
+
+<pre>git status           # See what changed
+git add .            # Stage all changes
+git commit -m "msg"  # Commit with message
+git push             # Push to GitHub (Vercel auto-deploys)</pre>
+
+<h2>Cursor Shortcuts</h2>
+
+<table>
+  <thead>
+    <tr><th>Action</th><th>Shortcut</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Open AI chat</td><td>Ctrl+L</td></tr>
+    <tr><td>Open terminal</td><td>Ctrl+`</td></tr>
+    <tr><td>Open command palette</td><td>Ctrl+Shift+P</td></tr>
+    <tr><td>Toggle sidebar</td><td>Ctrl+B</td></tr>
+  </tbody>
+</table>
+
+<h2>Custom Agents</h2>
+
+<table>
+  <thead>
+    <tr><th>Agent</th><th>Use When</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>project-launcher</td><td>Starting a brand new project</td></tr>
+    <tr><td>deck-builder</td><td>Creating or editing slide decks</td></tr>
+  </tbody>
+</table>
+
+<h2>Build Lifecycle</h2>
+
+<pre>Idea -> PRD -> Tooling Audit -> Plan -> Scaffold -> Build (70%) -> Polish -> Ship</pre>
+
+<h2>File Structure (Typical Next.js Project)</h2>
+
+<pre>my-project/
++-- .cursor/
+|   +-- rules/         # AI rules (brand, conventions)
+|   +-- agents/        # AI agent definitions
++-- public/
+|   +-- fonts/         # Roughwell, Gen1970, Poppins
+|   +-- logos/         # Flow logo variants
++-- src/
+|   +-- app/           # Next.js App Router pages
++-- package.json
++-- pnpm-lock.yaml
++-- tailwind.config.ts
++-- CLAUDE.md          # Claude Code memory (if using CLI)</pre>
+
+<h2>Tailwind Brand Config</h2>
+
+<pre>// tailwind.config.ts -- extend with Flow colors
+colors: {
+  moonlight: '#F3EDDF',
+  midnight: '#3D3D3D',
+  sunlight: '#E89700',
+  heart: '#F99AA9',
+  'ocean-swell': '#7DADBB',
+  olive: '#767317',
+  roots: '#8C4500',
+  'flow-bg': '#EDE8DA',
+}</pre>
+
+<h2>Financial Formatting</h2>
+
+<table>
+  <thead>
+    <tr><th>Format</th><th>Example</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Millions</td><td>$4.2M</td></tr>
+    <tr><td>Thousands</td><td>$150K</td></tr>
+    <tr><td>Negatives</td><td>($3.2M) not -$3.2M</td></tr>
+    <tr><td>Exact amounts</td><td>$4,231.50</td></tr>
+  </tbody>
+</table>
+
+<h2>Useful Prompts</h2>
+
+<p><strong>Starting a project:</strong><br>
+"Generate a PRD for [describe what you need]"</p>
+
+<p><strong>Getting help:</strong><br>
+"What files exist in this project and what do they do?"</p>
+
+<p><strong>Fixing something:</strong><br>
+"This is broken: [paste error]. Fix it."</p>
+
+<p><strong>Brand check:</strong><br>
+"Does this page follow Flow brand guidelines? Check colors, fonts, and spacing."</p>
+
+<p><strong>Deploying:</strong><br>
+"Run a build check and deploy to Vercel."</p>
+
+<h2>Getting Help</h2>
+
+<ul>
+  <li>Cursor docs: <a href="https://cursor.com/docs" target="_blank" rel="noopener">cursor.com/docs</a></li>
+  <li>Claude docs: <a href="https://docs.anthropic.com" target="_blank" rel="noopener">docs.anthropic.com</a></li>
+  <li>Next.js docs: <a href="https://nextjs.org/docs" target="_blank" rel="noopener">nextjs.org/docs</a></li>
+  <li>Tailwind docs: <a href="https://tailwindcss.com/docs" target="_blank" rel="noopener">tailwindcss.com/docs</a></li>
+  <li>pnpm docs: <a href="https://pnpm.io" target="_blank" rel="noopener">pnpm.io</a></li>
+</ul>
+
+<p>For Flow-specific questions, ask your manager or the team channel.</p>
+
+<nav class="nav-bottom">
+  <a href="START HERE.html">Back to Start</a>
+  <div class="nav-right">
+    <a href="07-your-first-build.html">Previous</a>
+  </div>
+</nav>
+
+</body>
+</html>

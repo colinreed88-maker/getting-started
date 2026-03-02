@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your First Build — AI at Flow</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: "Roughwell";
+    src: url("config/assets/fonts/Roughwell.woff2") format("woff2"),
+         url("config/assets/fonts/Roughwell.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --moonlight: #F3EDDF;
+    --midnight: #3D3D3D;
+    --sunlight: #E89700;
+    --ocean: #7DADBB;
+    --bg: #EDE8DA;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "Poppins", sans-serif;
+    background: var(--bg);
+    color: var(--midnight);
+    line-height: 1.7;
+    padding: 48px 24px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-family: "Roughwell", cursive;
+    font-size: 48px;
+    font-weight: normal;
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 40px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--sunlight);
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p { font-size: 14px; margin-bottom: 12px; }
+
+  .nav-top, .nav-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    margin-bottom: 32px;
+    border-bottom: 1px solid rgba(61,61,61,0.1);
+  }
+
+  .nav-bottom {
+    margin-top: 48px;
+    margin-bottom: 0;
+    padding-top: 24px;
+    border-top: 1px solid rgba(61,61,61,0.1);
+    border-bottom: none;
+  }
+
+  .nav-top a, .nav-bottom a {
+    color: var(--sunlight);
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  .nav-top a:hover, .nav-bottom a:hover { text-decoration: underline; }
+
+  .nav-right { display: flex; gap: 24px; }
+
+  .content-card {
+    background: white;
+    border-radius: 12px;
+    padding: 28px 32px;
+    border: 1px solid rgba(61,61,61,0.08);
+    box-shadow: 0 1px 3px rgba(61,61,61,0.04), 0 8px 32px rgba(61,61,61,0.06);
+    margin-bottom: 24px;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(61,61,61,0.04), 0 4px 16px rgba(61,61,61,0.04);
+    margin: 16px 0;
+  }
+
+  th, td {
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 14px;
+  }
+
+  th {
+    background: #F0EBE0;
+    font-weight: 600;
+  }
+
+  tr:not(:last-child) td { border-bottom: 1px solid rgba(61,61,61,0.08); }
+
+  pre, code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 13px;
+  }
+
+  pre {
+    background: #3D3D3D;
+    color: #F3EDDF;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0;
+    white-space: pre-wrap;
+  }
+
+  code:not(pre code) {
+    background: var(--moonlight);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+
+  ul {
+    list-style: none;
+    margin: 12px 0;
+  }
+
+  ul li {
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+    font-size: 14px;
+  }
+
+  ul li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--sunlight);
+  }
+
+  strong { font-weight: 600; }
+</style>
+</head>
+<body>
+
+<nav class="nav-top">
+  <a href="START HERE.html">Back to Start</a>
+  <div class="nav-right">
+    <a href="06-workflow-and-lifecycle.html">Previous</a>
+    <a href="08-reference.html">Next</a>
+  </div>
+</nav>
+
+<h1>Your First Build</h1>
+
+<p>This guide walks you through building a simple Flow-branded page from start to finish, using the full workflow. Set aside about 45 minutes.</p>
+
+<h2>What We Are Building</h2>
+
+<p>A <strong>Team Directory</strong> page -- a clean, branded grid of team members with photos, names, titles, and contact info. Simple enough to complete in one session, complex enough to use every part of the workflow.</p>
+
+<h2>Phase 1: Generate the PRD</h2>
+
+<p>Open Cursor. Start a new chat and type:</p>
+
+<pre>Generate a PRD for a team directory page. It should show team members in a card grid with photos, names, titles, and email addresses. Flow brand styling. Deploy to Vercel. Use placeholder data for now.</pre>
+
+<p>The AI will ask you a few scoping questions. Answer them:</p>
+<ul>
+  <li><strong>Users:</strong> Flow team members (internal)</li>
+  <li><strong>MVP scope:</strong> A single page with a responsive card grid, search/filter, and placeholder photos from Unsplash</li>
+  <li><strong>Data source:</strong> Hardcoded array for now (we can connect a database later)</li>
+  <li><strong>Design reference:</strong> "Clean, warm, Flow brand" (the AI already knows what this means)</li>
+</ul>
+
+<p>Review the PRD it generates. Does it match what you want? Adjust if needed, then confirm.</p>
+
+<h2>Phase 2: Plan and Scaffold</h2>
+
+<p>Tell Cursor:</p>
+
+<pre>Plan this build.</pre>
+
+<p>The AI will outline the phases:</p>
+<ol style="list-style: decimal; margin-left: 20px; margin-top: 8px;">
+  <li style="padding: 4px 0;">Scaffold a Next.js 15 project with Tailwind and pnpm</li>
+  <li style="padding: 4px 0;">Create the page route and layout</li>
+  <li style="padding: 4px 0;">Build the team card component</li>
+  <li style="padding: 4px 0;">Add search/filter functionality</li>
+  <li style="padding: 4px 0;">Style everything with Flow brand tokens</li>
+  <li style="padding: 4px 0;">Deploy to Vercel</li>
+</ol>
+
+<p>Review the plan. If it looks right, tell the AI to proceed:</p>
+
+<pre>Looks good. Start building.</pre>
+
+<h2>Phase 3: Build and Review</h2>
+
+<p>The AI will:</p>
+<ol style="list-style: decimal; margin-left: 20px; margin-top: 8px;">
+  <li style="padding: 4px 0;">Create the project structure</li>
+  <li style="padding: 4px 0;">Install dependencies with pnpm</li>
+  <li style="padding: 4px 0;">Create the page with placeholder data</li>
+  <li style="padding: 4px 0;">Apply Flow brand styling (Moonlight background, Midnight text, card shadows, Poppins font)</li>
+</ol>
+
+<p>At around 70% completion, the AI should run a build check. Watch for this in the terminal output.</p>
+
+<p><strong>Review it live.</strong> Look for:</p>
+<ul>
+  <li>Do the colors match Flow's brand?</li>
+  <li>Are the cards well-spaced and visually balanced?</li>
+  <li>Does it work on mobile?</li>
+  <li>Does the search filter work?</li>
+</ul>
+
+<p>If something is off, describe what you want changed:</p>
+
+<pre>The cards need more spacing between them. And make the name text larger.</pre>
+
+<h2>Phase 4: Polish and Ship</h2>
+
+<p>Once the core page works, refine:</p>
+
+<pre>Add a subtle hover effect on the cards. Make sure the page has a proper title and description. Add a Flow logo in the header.</pre>
+
+<p>When you are satisfied:</p>
+
+<pre>Run a final build check and deploy.</pre>
+
+<p>The AI will:</p>
+<ol style="list-style: decimal; margin-left: 20px; margin-top: 8px;">
+  <li style="padding: 4px 0;">Run pnpm build to verify no errors</li>
+  <li style="padding: 4px 0;">Commit and push to GitHub</li>
+  <li style="padding: 4px 0;">Vercel deploys automatically</li>
+  <li style="padding: 4px 0;">Share the live URL</li>
+</ol>
+
+<h2>What Just Happened</h2>
+
+<p>You built a production-ready, Flow-branded web page without writing code from scratch. Here is what the AI handled:</p>
+<ul>
+  <li><strong>Project scaffolding</strong> -- Next.js, Tailwind, pnpm, all configured</li>
+  <li><strong>Component architecture</strong> -- Card component, layout, search logic</li>
+  <li><strong>Brand application</strong> -- Colors, fonts, spacing, visual style</li>
+  <li><strong>Responsive design</strong> -- Works on desktop and mobile</li>
+  <li><strong>Deployment</strong> -- GitHub + Vercel, live in production</li>
+</ul>
+
+<p>And here is what you handled:</p>
+<ul>
+  <li><strong>Defining the need</strong> -- What to build and why</li>
+  <li><strong>Reviewing the PRD</strong> -- Ensuring the scope was right</li>
+  <li><strong>Quality judgment</strong> -- Is this good enough? Does it feel like Flow?</li>
+  <li><strong>Iteration direction</strong> -- "More spacing," "larger text," "add a hover effect"</li>
+</ul>
+
+<p>This is the pattern for everything you build going forward. The AI writes the code; you bring the taste, the judgment, and the domain knowledge.</p>
+
+<h2>What to Try Next</h2>
+
+<ol style="list-style: decimal; margin-left: 20px; margin-top: 8px;">
+  <li style="padding: 4px 0;"><strong>Add a detail view</strong> -- Click a team member card to see their full profile</li>
+  <li style="padding: 4px 0;"><strong>Create a slide deck</strong> -- Use the deck-builder agent to make a team overview presentation</li>
+  <li style="padding: 4px 0;"><strong>Build a dashboard</strong> -- A page with metrics, charts, and summary cards</li>
+</ol>
+
+<nav class="nav-bottom">
+  <a href="START HERE.html">Back to Start</a>
+  <div class="nav-right">
+    <a href="06-workflow-and-lifecycle.html">Previous</a>
+    <a href="08-reference.html">Next</a>
+  </div>
+</nav>
+
+</body>
+</html>

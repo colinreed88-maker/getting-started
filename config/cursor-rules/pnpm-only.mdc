@@ -1,0 +1,25 @@
+---
+description: Enforce pnpm as the only package manager. Never use npm or yarn.
+alwaysApply: true
+---
+
+# Package Manager: pnpm Only
+
+All projects use **pnpm v10**. Never use npm or yarn for any operation.
+
+## Rules
+
+- Use `pnpm add` to install packages, never `npm install` or `npm i`
+- Use `pnpm add -g` for global installs, never `npm install -g`
+- Use `pnpm dev`, `pnpm build`, `pnpm start` to run scripts
+- Use `pnpm remove` to uninstall packages
+- Never run `npm`, `npx`, or `yarn` commands
+- When a package blocks install due to `minimumReleaseAge`, add it to `minimumReleaseAgeExclude` in `pnpm-workspace.yaml` temporarily
+- When a package needs build scripts, add it to `onlyBuiltDependencies` in `pnpm-workspace.yaml`
+- Use `pnpm dlx` instead of `npx` for one-off package execution
+
+## Every project must have
+
+1. `"packageManager": "pnpm@10.30.1"` in `package.json`
+2. `pnpm-workspace.yaml` with `minimumReleaseAge: 10080`
+3. `pnpm-lock.yaml` (never `package-lock.json` or `yarn.lock`)

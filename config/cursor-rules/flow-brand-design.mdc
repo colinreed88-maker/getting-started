@@ -1,0 +1,100 @@
+---
+description: Detailed Flow brand CSS, slide deck formatting, table/chart styling, interactive features, and presentation structure. Load when building or editing HTML slide decks, dashboards, or any UI.
+alwaysApply: false
+---
+
+# Flow Brand Design — Detailed Reference
+
+## Visual style (CSS specifics)
+
+- **Soft shadows**: `0 1px 3px rgba(61,61,61,0.04), 0 8px 32px rgba(61,61,61,0.06)`
+- **Border-defined cards**: `1px solid rgba(61,61,61,0.06)` — shadow is secondary, not primary
+- **Background**: warm cream `#EDE8DA` with subtle radial gradients (sunlight + ocean swell at <5% opacity)
+- **Cards/panels**: white `#FFFFFF`, thin border + soft shadow, `border-radius: 12px`
+- **Buttons/controls**: white card style with subtle border; fill sunlight on hover. No solid dark buttons.
+- **Progress bars**: single-color sunlight, thin (2-3px)
+- **Font sizes**: titles ~48px (Roughwell), slide titles ~24px (Gen 1970), bullets ~15px, sub-bullets ~14px, table body ~12px, headers ~11px, exec card values ~20-22px, pill badges ~13px
+
+## Brand assets
+
+- **Fonts**: `assets/fonts/Roughwell.otf`, `Generation1970-Light.otf`, `Generation1970.otf`, `Generation1970-Bold.otf`, Poppins (all weights)
+- **Logos**: `assets/logos/Flow-Logo-FADED-CREAM.svg`, `Flow-Logo-FADED-GREY.svg`, `Flow-Logo-WING-CREAM.svg`, `Flow-Logo-WING-GREY.svg`
+- **Source**: Flow brand assets are in the shared Brand & Marketing folder on the company drive
+
+## HTML slide deck format
+
+### Layout
+
+- Custom HTML viewer (no reveal.js) — lightweight, single-file
+- Slides float as cards against `#EDE8DA` background — NOT fullscreen by default
+- Slide size: responsive, `min(1100px, calc(100vw - 340px))` with `aspect-ratio: 16/9`
+- **Title slide**: Midnight background, Roughwell headline (~48px), cream text, Flow logo bottom-right (~200px, 20% opacity), sunlight accent bar
+- **Section dividers**: Midnight background, Gen 1970 heading in white, sunlight accent bar
+- **Content slides**: white card, pill header + Gen 1970 title
+
+### Slide headers
+
+- **Pill badge**: sunlight background, white text, section name, rounded, ~13px Poppins
+- **Title**: Gen 1970 Light, ~24px, Midnight, next to pill
+
+### Content formatting
+
+- Bullets: en-dash (–) in sunlight for top-level, gray dashes for sub-bullets
+- Bold category headers inline, sub-bullets indented below
+- Exec summary cards: grid of metric cards with labels + values
+- Two-column layouts: CSS grid, Gen 1970 column headers underlined in sunlight
+
+### Table styling
+
+- Headers: soft warm `#F0EBE0` background, Midnight text — NOT solid dark/black
+- Header bottom border: `1.5px solid rgba(61,61,61,0.15)`
+- Total rows: `1.5px solid rgba(61,61,61,0.2)` top border
+- Alternating rows: Moonlight `#F3EDDF` for even rows
+- Section headers in tables: sunlight at 8% opacity, bold Midnight text
+- Tables centered with `justify-content: center`
+- Width adapts: narrow (2-3 cols) = `520px`; wide = `max-content` + scroll
+- Model data tables NOT editable; narrative text IS editable via `contenteditable`
+- Padding: `6-7px 12-14px` on cells
+- **Row color consistency**: Every cell in a row must share the same background. Never apply a distinct background to just the label/first column — rows should read as a single horizontal band.
+
+### Chart styling
+
+- Colors by category: Olive (totals), Ocean Swell (OpCo), Roots (MENA/negatives), Heart (RE), Sunlight (positive/other)
+- Labels above bars always — negatives in parentheses
+- No connector lines between waterfall bars
+- Hide value axis on bar/waterfall charts; show data labels directly
+- Use Chart.js with custom plugins; D3 for complex (Sankey) via iframe
+
+### Interactive features
+
+- **Editable text**: `contenteditable` on titles, bullets, commentary. Auto-save to localStorage with debounce. Ctrl/Cmd+S. Gold outline on hover/focus.
+- **Comments panel**: right-side, per-slide threads, localStorage. Toggle show/hide.
+- **Slide sorter**: left-side, draggable thumbnails, resizable (160-400px). Hamburger toggle top-left.
+- **Presentation mode**: fullscreen button bottom-right. Native fullscreen, nav on hover. Escape to exit.
+- **TOC**: dynamic from section dividers. Clickable. Rebuilds on reorder.
+- **All state** in localStorage with versioned keys
+
+### Navigation
+
+- Arrow keys (left/right, up/down)
+- Prev/next buttons below slide, white card style, sunlight hover
+- Slide counter centered, thin sunlight progress bar below
+- Double-click progress bar to reset cached edits
+
+### Deck structure (recommended order)
+
+1. Title (Midnight), 2. TOC, 3. Section dividers, 4. Exec Summary (cards, waterfall, RE cash, LTD table), 5. Forecast Detail, 6. Risks & Opportunities, 7. BU Detail, 8. Dev Projects, 9. OpCo Tables, 10. Headcount, 11. Dept Detail, 12. Appendix
+
+### Slide workflow
+
+1. **Adding slides**: insert HTML in the right position, then run `fix_slide_indices.py` to renumber all `data-slide` attributes and update the nav counter.
+2. **Removing slides**: delete the HTML block, run `fix_slide_indices.py`.
+3. **Reordering**: cut/paste the slide HTML, run `fix_slide_indices.py`.
+4. **After structural changes**: bump the localStorage key version (e.g. `v2` → `v3`) if old cached edits would conflict with new slide structure.
+5. **Extracting data**: write a Python script that reads from G: drive Excel files, outputs JSON locally. Build slides from the local JSON.
+6. **Verifying numbers**: always cross-reference key figures against the source model tabs (AN Numbers, LTD View, OpCo Sum, Consol x BU, Headcount). Use a verification script if needed.
+7. **Charts**: use Chart.js with custom plugins for bar labels. D3 for complex visualizations (Sankey). Embed D3 charts via iframe to isolate dependencies.
+
+### Reusable template
+
+The slide template (`slide-template/index.html`) has 10 slide types with HTML comments explaining structure. Copy folder, rename, replace content. See `.cursor/rules/slide-deck-creation.mdc` for the full guide.

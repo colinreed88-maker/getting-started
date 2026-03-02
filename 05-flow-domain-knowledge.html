@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flow Domain Knowledge — AI at Flow</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: "Roughwell";
+    src: url("config/assets/fonts/Roughwell.woff2") format("woff2"),
+         url("config/assets/fonts/Roughwell.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --moonlight: #F3EDDF;
+    --midnight: #3D3D3D;
+    --sunlight: #E89700;
+    --ocean: #7DADBB;
+    --bg: #EDE8DA;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "Poppins", sans-serif;
+    background: var(--bg);
+    color: var(--midnight);
+    line-height: 1.7;
+    padding: 48px 24px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-family: "Roughwell", cursive;
+    font-size: 48px;
+    font-weight: normal;
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 40px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--sunlight);
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  p { font-size: 14px; margin-bottom: 12px; }
+
+  .nav-top, .nav-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    margin-bottom: 32px;
+    border-bottom: 1px solid rgba(61,61,61,0.1);
+  }
+
+  .nav-bottom {
+    margin-top: 48px;
+    margin-bottom: 0;
+    padding-top: 24px;
+    border-top: 1px solid rgba(61,61,61,0.1);
+    border-bottom: none;
+  }
+
+  .nav-top a, .nav-bottom a {
+    color: var(--sunlight);
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  .nav-top a:hover, .nav-bottom a:hover { text-decoration: underline; }
+
+  .nav-right { display: flex; gap: 24px; }
+
+  .content-card {
+    background: white;
+    border-radius: 12px;
+    padding: 28px 32px;
+    border: 1px solid rgba(61,61,61,0.08);
+    box-shadow: 0 1px 3px rgba(61,61,61,0.04), 0 8px 32px rgba(61,61,61,0.06);
+    margin-bottom: 24px;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(61,61,61,0.04), 0 4px 16px rgba(61,61,61,0.04);
+    margin: 16px 0;
+  }
+
+  th, td {
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 14px;
+  }
+
+  th {
+    background: #F0EBE0;
+    font-weight: 600;
+  }
+
+  tr:not(:last-child) td { border-bottom: 1px solid rgba(61,61,61,0.08); }
+
+  pre, code {
+    font-family: Consolas, Monaco, "Courier New", monospace;
+    font-size: 13px;
+  }
+
+  pre {
+    background: #3D3D3D;
+    color: #F3EDDF;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0;
+    white-space: pre-wrap;
+  }
+
+  code:not(pre code) {
+    background: var(--moonlight);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+
+  ul {
+    list-style: none;
+    margin: 12px 0;
+  }
+
+  ul li {
+    padding: 6px 0;
+    padding-left: 20px;
+    position: relative;
+    font-size: 14px;
+  }
+
+  ul li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--sunlight);
+  }
+
+  strong { font-weight: 600; }
+</style>
+</head>
+<body>
+
+<nav class="nav-top">
+  <a href="START HERE.html">Back to Start</a>
+  <div class="nav-right">
+    <a href="04-claude-setup.html">Previous</a>
+    <a href="06-workflow-and-lifecycle.html">Next</a>
+  </div>
+</nav>
+
+<h1>Flow Domain Knowledge</h1>
+
+<p>This guide covers what you need to know about Flow as a business so the AI can build things that make sense in our context.</p>
+
+<h2>Who We Are</h2>
+
+<div class="content-card">
+  Flow is a hospitality company. We create spaces where people feel at home -- restaurants, hotels, bars, event spaces, and mixed-use properties. Everything we build digitally should reflect the same warmth, authenticity, and elevated quality as the physical spaces.
+</div>
+
+<h2>Brand Identity</h2>
+
+<p>Flow's brand is warm, welcoming, and elevated. Not flashy, not corporate, not "tech startup." Think: a beautifully designed boutique hotel lobby, not a Silicon Valley pitch deck.</p>
+
+<h3>Colors</h3>
+
+<table>
+  <thead>
+    <tr><th>Name</th><th>Hex</th><th>Usage</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Moonlight</td><td>#F3EDDF</td><td>Backgrounds, cards, surface</td></tr>
+    <tr><td>Midnight</td><td>#3D3D3D</td><td>Primary text, headers (dark charcoal, NOT blue)</td></tr>
+    <tr><td>Sunlight</td><td>#E89700</td><td>CTAs, highlights, accents</td></tr>
+    <tr><td>Heart</td><td>#F99AA9</td><td>Warm pink accent</td></tr>
+    <tr><td>Ocean Swell</td><td>#7DADBB</td><td>Cool secondary accent</td></tr>
+    <tr><td>Olive</td><td>#767317</td><td>Earthy accent</td></tr>
+    <tr><td>Roots</td><td>#8C4500</td><td>Warm brown accent</td></tr>
+  </tbody>
+</table>
+
+<h3>Fonts</h3>
+
+<table>
+  <thead>
+    <tr><th>Font</th><th>Usage</th><th>Size</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Roughwell</td><td>Headlines, display text</td><td>~48px</td></tr>
+    <tr><td>Generation 1970 Light</td><td>Subheaders, CTAs</td><td>~24px</td></tr>
+    <tr><td>Poppins</td><td>Body text, captions</td><td>Standard</td></tr>
+  </tbody>
+</table>
+
+<h3>Tone</h3>
+
+<ul>
+  <li>First-person plural: "we" and "us," not "the company" or "Flow Inc."</li>
+  <li>No exclamation points. No emojis. Oxford comma.</li>
+  <li>Positive, approachable, elevated, authentic</li>
+  <li>Casual but rhythmic -- like a conversation, not a press release</li>
+</ul>
+
+<h3>Visual Style</h3>
+
+<ul>
+  <li>Warm cream backgrounds (#EDE8DA)</li>
+  <li>White cards with thin borders, soft shadows</li>
+  <li>border-radius: 12px on cards and containers</li>
+  <li>Clean, elevated, timeless</li>
+</ul>
+
+<p><strong>Flow IS:</strong> Welcoming, Elevated, Authentic, Calm, Soulful</p>
+<p><strong>Flow is NOT:</strong> Pretentious, Cheesy, Overbearing, Generic</p>
+
+<h2>Digital Properties</h2>
+
+<p>Flow has several internal and external digital properties:</p>
+
+<ul>
+  <li><strong>Flow Intranet</strong> -- Internal dashboard for team metrics, announcements, and operational data</li>
+  <li><strong>Slide decks</strong> -- HTML-based presentation system (not PowerPoint) with branded templates</li>
+  <li><strong>Internal tools</strong> -- Various dashboards and utilities built with Next.js</li>
+</ul>
+
+<p>When you build something new, it should visually fit alongside these existing properties.</p>
+
+<h2>Tech Stack</h2>
+
+<table>
+  <thead>
+    <tr><th>Layer</th><th>Tool</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Framework</td><td>Next.js 15 (App Router) + TypeScript</td></tr>
+    <tr><td>Styling</td><td>Tailwind CSS</td></tr>
+    <tr><td>Package manager</td><td>pnpm v10 (never npm or yarn)</td></tr>
+    <tr><td>Deployment</td><td>GitHub to Vercel</td></tr>
+    <tr><td>Charts</td><td>Recharts (lazy-loaded)</td></tr>
+  </tbody>
+</table>
+
+<h2>Financial Conventions</h2>
+
+<p>When working with financial data in any context:</p>
+
+<ul>
+  <li>Negatives in parentheses: ($3.2M) not -$3.2M</li>
+  <li>Use M for millions, K for thousands: $4.2M, $150K</li>
+  <li>Always include units and time periods</li>
+  <li>Currency precision: thousands with one decimal ($4.2M), exact amounts with two decimals ($4,231.50)</li>
+</ul>
+
+<nav class="nav-bottom">
+  <a href="START HERE.html">Back to Start</a>
+  <div class="nav-right">
+    <a href="04-claude-setup.html">Previous</a>
+    <a href="06-workflow-and-lifecycle.html">Next</a>
+  </div>
+</nav>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+---
+description: Structured brainstorming and creative thinking framework. Load before any creative work -- designing features, building components, planning new functionality, or exploring architectural decisions. Adapted from marketplace brainstorming skill with Flow-specific context.
+alwaysApply: false
+---
+
+# Creative Brainstorm Framework
+
+Use this framework before any creative work: designing features, building UI, planning architecture, or scoping new functionality. Think first, build second.
+
+## When to Apply
+
+- Before creating a new page, component, or feature
+- Before a major refactor or architectural decision
+- When someone says "let's think through this" or "brainstorm"
+- When there are multiple valid approaches and the right choice isn't obvious
+
+## The Process
+
+### 1. Frame the Problem (30 seconds)
+
+State clearly in one sentence:
+- **What** we're solving
+- **Who** it's for
+- **Why** it matters now
+
+### 2. Diverge: Generate Options (2-3 minutes)
+
+List at least 3 distinct approaches. For each:
+- One sentence describing the approach
+- Key advantage
+- Key risk or tradeoff
+
+Don't evaluate yet. Quantity over quality at this stage.
+
+### 3. Converge: Pick the Best Path (1-2 minutes)
+
+Evaluate against these criteria (in order of priority for Flow):
+1. **Does it look good?** Design matters. Would this feel elevated and on-brand?
+2. **Is it correct?** Do the numbers tie? Is the data trustworthy?
+3. **Is it simple?** Can the team maintain this? Fewer moving parts wins.
+4. **Is it fast to build?** We iterate quickly. Simpler MVP, polish later.
+
+### 4. Commit and Document
+
+State the chosen approach and why. If this is part of a PRD or plan, record the decision there. Move to building.
+
+## Flow-Specific Considerations
+
+When brainstorming UI/UX:
+- Default to the Flow visual language: cream backgrounds, white cards, warm palette
+- Check if a similar pattern exists in flow-intranet -- reuse before reinventing
+- Mobile-first unless it's a slide deck
+
+When brainstorming data architecture:
+- Prefer server-side data fetching in Server Components
+- Check if existing data sources already have what we need before adding new ones
+- Server components with force-dynamic for protected pages
+
+When brainstorming charts/visualizations:
+- Lazy-load Recharts if charts aren't the primary view
+- Flow chart palette: Sunlight, Olive, Ocean Swell, Roots, Heart, Midnight
+- Data labels above bars, negatives in parentheses, no connector lines on waterfalls

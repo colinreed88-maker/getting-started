@@ -1,0 +1,66 @@
+---
+description: Next.js 15 and React performance best practices for Flow projects. Load when building or optimizing Next.js pages, components, or API routes. Adapted from marketplace React Best Practices skill with Flow-specific conventions.
+alwaysApply: false
+---
+
+# Next.js Best Practices (Flow)
+
+## Server Components by Default
+
+- All pages and data-fetching components should be Server Components unless they need interactivity
+- Add `"use client"` only when the component uses hooks, event handlers, or browser APIs
+- Fetch data in Server Components, pass as props to Client Components
+
+## Data Fetching
+
+- Fetch data in Server Components — use `Promise.all` for parallel requests, never sequential
+- Export `dynamic = "force-dynamic"` on pages with auth checks or real-time data
+- Do NOT use `unstable_cache` for data — causes stale data that's hard to debug
+
+## Bundle Optimization
+
+- **Lazy-load Recharts** when charts aren't the primary view. Use dynamic import with a `rc` state variable:
+  ```typescript
+  const [rc, setRc] = useState<typeof import("recharts") | null>(null);
+  useEffect(() => { import("recharts").then(setRc); }, []);
+  ```
+  Then use `rc.BarChart`, `rc.LineChart`, etc. Never bare imports when lazy-loading.
+- Use `next/dynamic` for heavy client components that aren't needed on initial render
+- Keep page-level Server Components lean — push complexity into child components
+
+## Component Patterns
+
+- **Suspense boundaries** around async content with `<DashboardSkeleton>` fallbacks
+- **Error boundaries** for graceful failure on data-fetch errors
+- Colocate data fetching with the component that uses it (not in parent pages)
+- Extract reusable UI into `components/ui/` with consistent Flow styling
+
+## Styling
+
+- Tailwind CSS for all styling. Use Flow brand tokens:
+  - `bg-[#F3EDDF]` (Moonlight), `text-[#3D3D3D]` (Midnight), `bg-[#E89700]` (Sunlight)
+  - White cards: `bg-white rounded-xl border border-gray-100 shadow-sm`
+- Prefer Tailwind classes over inline styles or CSS modules
+- Mobile-first: design for mobile, enhance for desktop
+
+## Performance
+
+- Minimize client-side JavaScript. Prefer server rendering.
+- Use `loading.tsx` files for route-level loading states
+- Images: use `next/image` with proper `width`/`height` or `fill` prop
+- Avoid layout shifts: set explicit dimensions on containers before data loads
+
+## API Routes
+
+- Use Route Handlers (`app/api/`) for server-side logic
+- Protect with `CRON_SECRET` for cron endpoints
+- Return proper HTTP status codes and structured JSON errors
+- For heavy computation, consider Edge Runtime (but verify compatibility first)
+
+## Common Anti-Patterns to Avoid
+
+- Fetching data in `useEffect` when a Server Component would work
+- Importing full libraries client-side when only a subset is needed
+- Using `any` types — prefer proper TypeScript types from `lib/types/`
+- Nesting Suspense boundaries unnecessarily (one per major data section is enough)
+- Creating API routes just to fetch data — use Server Components directly when possible
